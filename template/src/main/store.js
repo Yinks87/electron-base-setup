@@ -1,18 +1,29 @@
 // main/store.js
+import { app } from 'electron';
+import { mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 import Store from 'electron-store';
 
-// Dateiname (ohne .json) je Store. Gespeichert in app.getPath('userData').
+// Dateiname (ohne .json) je Store.
+// Alle Stores liegen gesammelt im Ordner "store" im userData-Verzeichnis der App
+// (Windows: %APPDATA%/<App-Name>/store). Der Ordner wird bei Bedarf angelegt.
 const FILE_NAMES = {
-  app: 'appSettings', // -> appSettings.json (Autostart, Schließverhalten, Fensterposition)
+  app: 'app-settings', // -> store/app-settings.json (Autostart, Schließverhalten, Fensterposition)
   actionLog: 'action-log' // wird vom Logger genutzt, hat keine Defaults/Normalizer
-  // example: 'example-settings' // -> example-settings.json
+  // example: 'example-settings' // -> store/example-settings.json
 };
+
+function storeDir() {
+  const dir = join(app.getPath('userData'), 'store');
+  mkdirSync(dir, { recursive: true });
+  return dir;
+}
 
 const cache = new Map();
 
 export function getStore(key) {
   if (!cache.has(key)) {
-    cache.set(key, new Store({ name: FILE_NAMES[key] }));
+    cache.set(key, new Store({ name: FILE_NAMES[key], cwd: storeDir() }));
   }
   return cache.get(key);
 }
