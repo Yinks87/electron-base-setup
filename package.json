@@ -1,0 +1,11 @@
+{
+  "name": "electron-base-setup",
+  "version": "1.0.0",
+  "description": "Basis-Setup (Store, Logger, IPC, Updater, Tray, Fensterposition) für electron-vite Projekte",
+  "type": "module",
+  "bin": {
+    "electron-base-setup": "bin/apply.js"
+  },
+  "files": ["bin", "template"],
+  "license": "MIT"
+}
