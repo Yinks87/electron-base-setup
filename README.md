@@ -18,13 +18,14 @@ Danach im Projektordner:
  
 ```bash
 cd mein-projekt
-npx github:Yinks87/electron-base-setup
+npm install # Installiert das Basis Projekt
+npx --allow-git=all github:Yinks87/electron-base-setup # Installiert die Erweiterungen
 ```
  
 Nur Dateien kopieren, ohne Pakete zu installieren:
  
 ```bash
-npx github:Yinks87/electron-base-setup --no-install
+npx --allow-git=all github:Yinks87/electron-base-setup --no-install # Installiert die Erweiterungen nicht, lädt sie nur
 ```
  
 Hinweise:
