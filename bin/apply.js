@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Kopiert template/src in das aktuelle electron-vite Projekt und installiert electron-store.
+// Kopiert den Inhalt von template/ in das aktuelle electron-vite Projekt (template/src -> src,
+// Dateien direkt in template/ wie .prettierrc.yaml -> Projektroot) und installiert electron-store.
 // Aufruf im Projektordner:  node /pfad/zu/electron-base-setup/bin/apply.js [--no-install]
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
@@ -8,7 +9,7 @@ import { spawnSync } from 'node:child_process';
 
 const skipInstall = process.argv.includes('--no-install');
 const target = process.cwd();
-const templateSrc = join(dirname(fileURLToPath(import.meta.url)), '..', 'template', 'src');
+const templateDir = join(dirname(fileURLToPath(import.meta.url)), '..', 'template');
 
 if (!existsSync(join(target, 'package.json')) || !existsSync(join(target, 'src', 'main'))) {
   console.error('Bitte im Hauptordner eines electron-vite Projekts ausführen (package.json + src/main).');
@@ -22,14 +23,15 @@ function walk(dir) {
   });
 }
 
-for (const file of walk(templateSrc)) {
-  const rel = relative(templateSrc, file);
-  const dest = join(target, 'src', rel);
+for (const file of walk(templateDir)) {
+  // Der Pfad innerhalb von template/ entspricht dem Zielpfad im Projekt.
+  const rel = relative(templateDir, file);
+  const dest = join(target, rel);
   mkdirSync(dirname(dest), { recursive: true });
-  // Vorhandene Dateien (z. B. src/main/index.js aus dem Scaffold) werden einmalig als .orig gesichert.
+  // Vorhandene Dateien (z. B. src/main/index.js oder .prettierrc.yaml aus dem Scaffold) werden einmalig als .orig gesichert.
   if (existsSync(dest) && !existsSync(dest + '.orig')) copyFileSync(dest, dest + '.orig');
   copyFileSync(file, dest);
-  console.log('  +', join('src', rel));
+  console.log('  +', rel);
 }
 
 const pkg = JSON.parse(readFileSync(join(target, 'package.json'), 'utf8'));
