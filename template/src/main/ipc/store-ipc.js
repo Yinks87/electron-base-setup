@@ -1,4 +1,7 @@
 // main/ipc/store-ipc.js
+
+let initialized = false;
+import { logger } from '../services/logger';
 import { SECTIONS, getSettings, saveSettings } from '../store';
 import { applyAppSettings } from '../lifecycle';
 import { handle } from './handle';
@@ -8,6 +11,10 @@ function assertSection(section) {
 }
 
 export function initializeStoreIpc() {
+  if (initialized) return logger.info('[IPC]', 'Store IPC already initialized');
+  initialized = true;
+  logger.info('[IPC]', 'Store IPC initialized');
+
   handle('settings:get', (section) => {
     assertSection(section);
     return getSettings(section);
