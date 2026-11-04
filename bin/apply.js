@@ -35,7 +35,7 @@ for (const file of walk(templateSrc)) {
 const pkg = JSON.parse(readFileSync(join(target, 'package.json'), 'utf8'));
 const deps = { ...pkg.dependencies, ...pkg.devDependencies };
 // electron-store v8 ist CommonJS und läuft ohne Extra-Konfiguration mit electron-vite (v9+ ist ESM-only).
-const wanted = ['electron-store@8'];
+const wanted = ['electron-store@latest'];
 if (!deps['electron-updater']) wanted.push('electron-updater');
 if (!deps['@electron-toolkit/utils']) wanted.push('@electron-toolkit/utils');
 
