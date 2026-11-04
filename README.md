@@ -14,16 +14,6 @@ Basis-Setup für [electron-vite](https://electron-vite.org) Projekte (JavaScript
 npm create @quick-start/electron@latest
 ```
  
-Fragen beim Scaffolding:
- 
-| Frage | Antwort |
-| --- | --- |
-| Projektname | frei wählbar |
-| Framework | React |
-| TypeScript | No |
-| Electron-Updater-Plugin | Yes |
-| Electron-Download-Mirror | No (nur sinnvoll, wenn GitHub langsam oder gesperrt ist, z. B. in China) |
- 
 Danach im Projektordner:
  
 ```bash
