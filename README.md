@@ -218,7 +218,7 @@ Events vom Main-Prozess ans Frontend: `broadcast('foo:change', payload)` aus `se
 | --- | --- |
 | "Bitte im Hauptordner eines electron-vite Projekts ausführen" | In den Projektordner wechseln, in dem `package.json` und `src/main` liegen. |
 | `npm error code EALLOWGIT` beim `npx github:...` (npm 12 blockiert Git-Pakete standardmäßig) | PowerShell: `$env:NPM_CONFIG_ALLOW_GIT = "all"`, dann `npx github:Yinks87/electron-base-setup`, danach `Remove-Item Env:NPM_CONFIG_ALLOW_GIT`. Oder das Repo klonen und `node <pfad>\bin\apply.js` ausführen. |
-| `Cannot find module 'electron-store'` | `npm install electron-store@8` (bei `--no-install` nötig). |
+| `Cannot find module 'electron-store'` | `npm install electron-store@latest` (bei `--no-install` nötig). |
 | Update-Fehler im gepackten Build | `publish` in `electron-builder.yml` prüfen, es muss auf ein erreichbares Release-Ziel zeigen. |
 | `npx` liefert eine alte Version des Setups | `npx clear-npx-cache` ausführen oder `npx --yes github:Yinks87/electron-base-setup@main` verwenden. |
 | Original-Dateien wiederherstellen | Die Sicherungen liegen als `*.orig` neben den überschriebenen Dateien. |
