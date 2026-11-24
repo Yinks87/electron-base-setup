@@ -53,7 +53,7 @@ node /pfad/zu/electron-base-setup/bin/apply.js
 
 1. Prüft, ob es im Hauptordner eines electron-vite Projekts läuft (`package.json` und `src/main` müssen existieren).
 2. Kopiert `template/src/**` nach `src/**`. Existiert eine Datei bereits (z. B. `src/main/index.js` aus dem Scaffold), wird sie einmalig als `<datei>.orig` gesichert und dann überschrieben.
-3. Installiert fehlende Pakete: `electron-store@8`, `electron-updater`, `@electron-toolkit/utils`.
+3. Installiert fehlende Pakete: `electron-store@12`, `electron-updater`, `@electron-toolkit/utils`.
 
 `electron-store` ist bewusst auf Version 8 festgelegt. Ab v9 ist das Paket nur noch ESM und braucht in electron-vite zusätzliche Konfiguration. v8 läuft ohne Anpassung.
 
